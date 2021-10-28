@@ -1,3 +1,6 @@
+// 環境変数セット
+const envSet = require(`./enviroment_files/env.${process.env.NODE_ENV || 'development'}.js`)
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -47,7 +50,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: envSet.apiDomain
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
