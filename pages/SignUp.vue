@@ -67,7 +67,7 @@ export default {
 
   methods: {
     async signUp () {
-      // バリデーション
+      // 簡易バリデーション
       if (this.signUpRequestBody.mail === '' ||
         this.signUpRequestBody.password === '' ||
         this.signUpRequestBody.display_name === '' ||
@@ -80,6 +80,8 @@ export default {
       // api登録
       await this.$axios.$post('/api/sign/up', this.signUpRequestBody).then(() => {
         console.log(this.signUpRequestBody)
+        // 登録完了後、目標一覧に画面遷移
+        this.$router.push('/goals')
       })
     }
   }
@@ -87,12 +89,5 @@ export default {
 </script>
 
 <style scoped>
-.top {
-  background-color: #F4F4F4;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 700px;
-  /*だいたいのスマホの横幅*/
-  min-width: 375px;
-}
+
 </style>
