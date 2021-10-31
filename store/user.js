@@ -41,6 +41,14 @@ export const actions = {
       commit('setDisplayName', res.display_name)
     })
   },
+  async signIn({ commit }, signInRequestBody) {
+    await this.$axios.$post('/api/sign/in', signInRequestBody).then((res) => {
+      // 登録OKだったらユーザ情報をstateに保存する
+      commit('setIsSignedIn', true)
+      // バックエンドのレスポンスでユーザIDを返却するようにしている
+      commit('setId', res)
+    })
+  },
   async signOut({ commit }) {
     await this.$axios.$post('/api/sign/out').then(() => {
       // サインアウトOKだったらユーザ情報をstateから破棄する
