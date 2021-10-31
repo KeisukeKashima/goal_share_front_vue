@@ -56,7 +56,6 @@ export default {
   data () {
     return {
       user: {
-        id: this.userId,
         mail: '',
         password: '',
         display_name: '',
@@ -68,7 +67,7 @@ export default {
 
   computed: {
     userId () {
-      return Number(this.$route.params.id)
+      return this.$store.getters['user/getId']
     }
   },
 

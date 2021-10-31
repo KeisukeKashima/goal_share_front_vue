@@ -40,13 +40,13 @@ export default {
   data () {
     return {
       user: {
-        'id': this.userId,
-        'mail': '',
-        'password': '',
-        'display_name': '',
-        'age': '',
-        'sex': false,
-        'Goal': []
+        id: this.userId,
+        mail: '',
+        password: '',
+        display_name: '',
+        age: '',
+        sex: false,
+        Goal: []
       }
     }
   },
