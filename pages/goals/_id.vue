@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 style="text-align: center">目標詳細</h2>
     <a-card
       :title="goal.title"
       :bordered="true"

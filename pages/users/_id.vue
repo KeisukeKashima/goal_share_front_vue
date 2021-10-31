@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 style="text-align: center">ユーザ詳細</h2>
     <a-card
       :title="`${user.display_name} さん`"
       :bordered="true"

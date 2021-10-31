@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 style="text-align: center">目標更新</h2>
     <a-form-model>
       <a-input
         v-model="goalRequestBody.title"

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 style="text-align: center">ログイン</h2>
     <a-form-model>
 
       <!--メールアドレス-->

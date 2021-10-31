@@ -27,7 +27,7 @@
               <a-menu-item key="6">
                 <NuxtLink :to="{ name: 'users-id', params: { id: userId } }">
                   <a-icon type="tags"/>
-                  設定済み目標
+                  設定済みの目標と更新
                 </NuxtLink>
               </a-menu-item>
               <a-menu-item key="2" @click="signOut">
