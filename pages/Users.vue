@@ -1,23 +1,24 @@
 <template>
   <div>
-    <h2 style="text-align: center">目標一覧</h2>
+    <h2 style="text-align: center">ユーザ一覧</h2>
     <div class="card-wrap">
       <div
-        v-for="(goal, key) in goals"
+        v-for="(user, key) in users"
         :key="key"
       >
         <a-card
-          :title="goal.title"
+          :title="`${user.display_name} さん`"
           :bordered="true"
           class="card"
         >
-          <p>■詳細</p>{{ goal.detail }}
+          <p>■年齢</p>{{ user.age }}
           <div class="mgt20"></div>
-          <p>■期限</p>{{ goal.deadline }}
+          <p>■性別</p>{{ user.sex ? "男性" : "女性" }}
+
           <div class="mgt20"></div>
-          <NuxtLink :to="{ name: 'goals-id', params: { id: goal.id } }">
+          <NuxtLink :to="{ name: 'users-id', params: { id: user.id } }">
             <a-icon type="rise"/>
-            この目標の詳細を確認
+            このユーザの設定した目標を見る
           </NuxtLink>
         </a-card>
       </div>
@@ -27,22 +28,22 @@
 
 <script>
 export default {
-  name: 'Goals',
+  name: 'Users',
 
   data () {
     return {
-      goals: []
+      users: []
     }
   },
 
   created () {
-    this.fetchGoals()
+    this.fetchUsers()
   },
 
   methods: {
-    async fetchGoals () {
-      await this.$axios.$get('/api/goals').then((res) => {
-        this.goals = res
+    async fetchUsers () {
+      await this.$axios.$get('/api/users').then((res) => {
+        this.users = res
       })
     }
   }

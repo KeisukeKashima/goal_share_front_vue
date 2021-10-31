@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 style="text-align: center">新規会員登録</h2>
     <a-form-model>
 
       <!--メールアドレス-->

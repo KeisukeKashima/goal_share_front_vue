@@ -13,9 +13,21 @@
             <!--ログイン中のヘッダーメニュー-->
             <template v-if="isSignedIn">
               <a-menu-item key="1">
-                <NuxtLink :to="{ name: 'users', params: { id: userId } }">
+                <NuxtLink to="/mypage">
                   <a-icon type="user"/>
                   マイページ
+                </NuxtLink>
+              </a-menu-item>
+              <a-menu-item key="5">
+                <NuxtLink to="/creategoal">
+                  <a-icon type="plus-circle"/>
+                  新規目標設定
+                </NuxtLink>
+              </a-menu-item>
+              <a-menu-item key="6">
+                <NuxtLink :to="{ name: 'users-id', params: { id: userId } }">
+                  <a-icon type="tags"/>
+                  設定済みの目標と更新
                 </NuxtLink>
               </a-menu-item>
               <a-menu-item key="2" @click="signOut">
