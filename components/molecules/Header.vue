@@ -16,22 +16,22 @@
           </span>
             <a-menu-item key="1">
               <NuxtLink to="/signup">
-                新規会員登録
+                <a-icon type="plus-circle" />新規会員登録
               </NuxtLink>
             </a-menu-item>
             <a-menu-item key="2">
               <NuxtLink to="/signin">
-                ログイン
+                <a-icon type="login" />ログイン
               </NuxtLink>
             </a-menu-item>
             <a-menu-item key="3">
               <NuxtLink to="/goals">
-                目標一覧
+                <a-icon type="rise" />目標一覧
               </NuxtLink>
             </a-menu-item>
             <a-menu-item key="4">
               <NuxtLink to="/users">
-                ユーザ一覧
+                <a-icon type="team" />ユーザ一覧
               </NuxtLink>
             </a-menu-item>
           </a-sub-menu>
