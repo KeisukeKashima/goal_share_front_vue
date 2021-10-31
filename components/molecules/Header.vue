@@ -13,7 +13,7 @@
             <!--ログイン中のヘッダーメニュー-->
             <template v-if="isSignedIn">
               <a-menu-item key="1">
-                <NuxtLink :to="{ name: 'users', params: { id: userId } }">
+                <NuxtLink :to="{ name: 'mypage-id', params: { id: userId } }">
                   <a-icon type="user"/>
                   マイページ
                 </NuxtLink>
