@@ -14,6 +14,11 @@
           <p>■詳細</p>{{ goal.detail }}
           <div class="mgt20"></div>
           <p>■期限</p>{{ goal.deadline }}
+          <div class="mgt20"></div>
+          <NuxtLink :to="{ name: 'goals-id', params: { id: goal.id } }">
+            <a-icon type="rise"/>
+            この目標の詳細を確認
+          </NuxtLink>
         </a-card>
       </div>
     </div>
