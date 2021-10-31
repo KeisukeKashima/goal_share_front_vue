@@ -29,6 +29,14 @@
           <p>■詳細</p>{{ goal.detail }}
           <div class="mgt20"></div>
           <p>■期限</p>{{ goal.deadline }}
+
+          <!--本人のみ目標編集画面への遷移を表示-->
+          <div v-if="loginUserId == userId">
+            <NuxtLink :to="{ name: 'updategoal-id', params: { id: goal.id } }">
+              <a-icon type="rise"/>
+              目標を更新する
+            </NuxtLink>
+          </div>
         </a-card>
       </div>
     </a-card>
@@ -54,6 +62,9 @@ export default {
   computed: {
     userId () {
       return Number(this.$route.params.id)
+    },
+    loginUserId () {
+      return this.$store.getters['user/getId']
     }
   },
 

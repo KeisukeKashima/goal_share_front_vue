@@ -24,6 +24,12 @@
                   新規目標設定
                 </NuxtLink>
               </a-menu-item>
+              <a-menu-item key="6">
+                <NuxtLink :to="{ name: 'users-id', params: { id: userId } }">
+                  <a-icon type="tags"/>
+                  設定済み目標
+                </NuxtLink>
+              </a-menu-item>
               <a-menu-item key="2" @click="signOut">
                 <a-icon type="logout"/>
                 ログアウト
