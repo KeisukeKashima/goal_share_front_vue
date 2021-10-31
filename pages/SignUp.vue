@@ -77,11 +77,13 @@ export default {
         alert('未入力の項目があります')
         return
       }
-      // api登録
-      await this.$axios.$post('/api/sign/up', this.signUpRequestBody).then(() => {
-        console.log(this.signUpRequestBody)
+      // 新規登録処理(storeのactionsでapiを叩き、stateにユーザ情報保存している)
+      await this.$store.dispatch('user/signUp', this.signUpRequestBody).then(() => {
         // 登録完了後、目標一覧に画面遷移
         this.$router.push('/goals')
+      }).catch((err) => {
+        alert('新規登録処理に失敗しました。。')
+        console.log(err)
       })
     }
   }

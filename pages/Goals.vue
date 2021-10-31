@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>目標一覧</h2>
+    <h2 style="text-align: center">目標一覧</h2>
     <div class="card-wrap">
       <div
         v-for="(goal, key) in goals"
