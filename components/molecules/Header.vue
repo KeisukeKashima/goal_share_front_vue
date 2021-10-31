@@ -18,11 +18,9 @@
                   マイページ
                 </NuxtLink>
               </a-menu-item>
-              <a-menu-item key="2">
-                <NuxtLink to="/signout">
-                  <a-icon type="logout"/>
-                  ログアウト
-                </NuxtLink>
+              <a-menu-item key="2" @click="signOut">
+                <a-icon type="logout"/>
+                ログアウト
               </a-menu-item>
             </template>
             <!--未ログイン中のヘッダーメニュー-->
@@ -76,6 +74,24 @@ export default {
     },
     userId () {
       return this.$store.getters['user/getId']
+    }
+  },
+  methods: {
+    signOut () {
+      // キャンセルなら以降の処理を実行しない
+      if (!confirm('本当にログアウトしますか？')) {
+        return
+      }
+
+      this.$store.dispatch('user/signOut').then(() => {
+        alert('ログアウトしました')
+        // リロードさせないとstoreのログイン情報が画面に反映されなかったためリロードさせている
+        window.location.reload()
+        this.$router.push('/goals')
+      }).catch((err) => {
+        alert('ログアウトに失敗しました')
+        console.log(err.message)
+      })
     }
   }
 }

@@ -41,6 +41,12 @@ export const actions = {
       commit('setDisplayName', res.display_name)
     })
   },
-  signOut() {
+  async signOut({ commit }) {
+    await this.$axios.$post('/api/sign/out').then(() => {
+      // サインアウトOKだったらユーザ情報をstateから破棄する
+      commit('setIsSignedIn', false)
+      commit('setId', '')
+      commit('setDisplayName', '')
+    })
   }
 }
