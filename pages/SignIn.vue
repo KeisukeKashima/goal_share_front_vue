@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">ログイン</h2>
+    <page-title title="ログイン"/>
     <a-form-model>
 
       <!--メールアドレス-->
@@ -9,7 +9,7 @@
         v-decorator="['userName', { rules: [{ required: true, message: 'Please input your username!' }] }]"
         placeholder="メールアドレス"
       >
-        <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+        <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
       </a-input>
 
       <!--パスワード-->
@@ -19,7 +19,7 @@
         type="password"
         placeholder="パスワード"
       >
-        <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
+        <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)"/>
       </a-input-password>
 
       <!--ボタン-->
@@ -33,8 +33,12 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'SignIn',
+  components: { PageTitle },
+
   data () {
     return {
       signInRequestBody: {
@@ -44,7 +48,7 @@ export default {
     }
   },
   methods: {
-    async signIn () {
+    signIn () {
       // 簡易バリデーション
       if (this.signInRequestBody.mail === '' ||
         this.signInRequestBody.password === ''
@@ -53,7 +57,7 @@ export default {
         return
       }
       // サインイン処理(storeのactionsでapiを叩き、stateにユーザ情報保存している)
-      await this.$store.dispatch('user/signIn', this.signInRequestBody).then(() => {
+      this.$store.dispatch('user/signIn', this.signInRequestBody).then(() => {
         alert('ログインに成功しました！')
         // 登録完了後、目標一覧に画面遷移
         this.$router.push('/goals')

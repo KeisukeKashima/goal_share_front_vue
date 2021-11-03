@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">ユーザ一覧</h2>
+    <page-title title="ユーザ一覧"/>
     <div class="card-wrap">
       <div
         v-for="(user, key) in users"
@@ -13,7 +13,7 @@
         >
           <p>■年齢</p>{{ user.age }}
           <div class="mgt20"></div>
-          <p>■性別</p>{{ user.sex ? "男性" : "女性" }}
+          <p>■性別</p>{{ user.sex ? '男性' : '女性' }}
 
           <div class="mgt20"></div>
           <NuxtLink :to="{ name: 'users-id', params: { id: user.id } }">
@@ -27,8 +27,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'Users',
+  components: { PageTitle },
 
   data () {
     return {
@@ -41,8 +44,8 @@ export default {
   },
 
   methods: {
-    async fetchUsers () {
-      await this.$axios.$get('/api/users').then((res) => {
+    fetchUsers () {
+      this.$axios.$get('/api/users').then((res) => {
         this.users = res
       })
     }

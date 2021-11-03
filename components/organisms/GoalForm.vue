@@ -1,0 +1,90 @@
+<template>
+  <div>
+    <page-title :title="pageTitle"/>
+
+    <a-form-model>
+      <a-input
+        v-model="goal.title"
+        placeholder="目標のタイトル"
+      >
+      </a-input>
+      <a-input
+        v-model="goal.detail"
+        placeholder="目標の詳細"
+      />
+      <a-input
+        v-model="goal.deadline"
+        placeholder="いつまでに達成したいか"
+      />
+
+      <a-radio-group v-model="goal.master_progress_status_id">
+        <a-radio :value="1">未達成</a-radio>
+        <a-radio :value="2">達成済み</a-radio>
+      </a-radio-group>
+
+      <a-button type="primary" @click="submit">
+        {{ goalId ? '目標を更新' : '目標新規作成' }}
+      </a-button>
+
+    </a-form-model>
+  </div>
+</template>
+
+<script>
+import PageTitle from '~/components/atoms/PageTitle'
+
+export default {
+  name: 'GoalForm',
+  components: { PageTitle },
+
+  data () {
+    return {
+      goal: {}
+    }
+  },
+
+  props: {
+    goalId: {
+      type: Number,
+      default: null
+    }
+  },
+
+  computed: {
+    pageTitle () {
+      return this.goalId ? '目標更新' : '目標新規作成'
+    }
+  },
+
+  created () {
+    this.fetchGoal()
+  },
+
+  methods: {
+    fetchGoal () {
+      if (this.goalId) {
+        this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
+          this.goal = res
+        })
+      }
+    },
+
+    submit () {
+      // 簡易バリデーション
+      if (this.goal.title === '' ||
+        this.goal.detail === '' ||
+        this.goal.deadline === '' ||
+        this.goal.master_progress_status_id === ''
+      ) {
+        alert('未入力の項目があります')
+        return
+      }
+      this.$emit('submit', this.goal)
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

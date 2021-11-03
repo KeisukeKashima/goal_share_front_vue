@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">ユーザ詳細</h2>
+    <page-title title="ユーザ詳細"/>
     <a-card
       :title="`${user.display_name} さん`"
       :bordered="true"
@@ -32,7 +32,7 @@
           <p>■期限</p>{{ goal.deadline }}
 
           <!--本人のみ目標編集画面への遷移を表示-->
-          <div v-if="loginUserId == userId">
+          <div v-if="loginUserId === userId">
             <NuxtLink :to="{ name: 'updategoal-id', params: { id: goal.id } }">
               <a-icon type="rise"/>
               目標を更新する
@@ -45,7 +45,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
+  components: { PageTitle },
+
   data () {
     return {
       user: {
@@ -74,8 +78,8 @@ export default {
   },
 
   methods: {
-    async fetchUser () {
-      await this.$axios.$get(`/api/users/goals/${this.userId}`).then((res) => {
+    fetchUser () {
+      this.$axios.$get(`/api/users/goals/${this.userId}`).then((res) => {
         this.user = res
       })
     }
