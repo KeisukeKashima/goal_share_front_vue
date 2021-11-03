@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">{{ this.userId ? 'マイページ' : '会員登録ページ' }}</h2>
+    <h2 style="text-align: center">{{ userId ? 'マイページ' : '会員登録ページ' }}</h2>
 
     <a-form-model>
       <!--メールアドレス-->
@@ -42,7 +42,7 @@
       </a-radio-group>
 
       <a-button type="primary" @click="submit">
-        {{ this.userId ? 'マイページ更新' : '新規会員登録' }}
+        {{ userId ? 'マイページ更新' : '新規会員登録' }}
       </a-button>
     </a-form-model>
 
