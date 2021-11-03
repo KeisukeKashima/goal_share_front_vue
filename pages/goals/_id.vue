@@ -41,8 +41,8 @@ export default {
   },
 
   methods: {
-    async fetchGoal () {
-      await this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
+    fetchGoal () {
+      this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
         this.goal = res
       })
     }

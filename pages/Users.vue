@@ -13,7 +13,7 @@
         >
           <p>■年齢</p>{{ user.age }}
           <div class="mgt20"></div>
-          <p>■性別</p>{{ user.sex ? "男性" : "女性" }}
+          <p>■性別</p>{{ user.sex ? '男性' : '女性' }}
 
           <div class="mgt20"></div>
           <NuxtLink :to="{ name: 'users-id', params: { id: user.id } }">
@@ -44,8 +44,8 @@ export default {
   },
 
   methods: {
-    async fetchUsers () {
-      await this.$axios.$get('/api/users').then((res) => {
+    fetchUsers () {
+      this.$axios.$get('/api/users').then((res) => {
         this.users = res
       })
     }

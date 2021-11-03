@@ -19,13 +19,13 @@ export const getters = {
 
 // this.$store.commit('user/setIsSignedIn', true)  で実行
 export const mutations = {
-  setIsSignedIn(state, payload) {
+  setIsSignedIn (state, payload) {
     state.isSignedIn = payload
   },
-  setId(state, payload) {
+  setId (state, payload) {
     state.id = payload
   },
-  setDisplayName(state, payload) {
+  setDisplayName (state, payload) {
     state.displayName = payload
   },
 }
@@ -33,24 +33,24 @@ export const mutations = {
 // this.$store.dispatch('user/signUp', signUpRequestBody)
 // .then(() => {正常ログイン後処理}).catch((err) => {ログインエラー時処理})
 export const actions = {
-  async signUp({ commit }, signUpRequestBody) {
-    await this.$axios.$post('/api/sign/up', signUpRequestBody).then((res) => {
+  signUp ({ commit }, signUpRequestBody) {
+    this.$axios.$post('/api/sign/up', signUpRequestBody).then((res) => {
       // 登録OKだったらユーザ情報をstateに保存する
       commit('setIsSignedIn', true)
       commit('setId', res.id)
       commit('setDisplayName', res.display_name)
     })
   },
-  async signIn({ commit }, signInRequestBody) {
-    await this.$axios.$post('/api/sign/in', signInRequestBody).then((res) => {
+  signIn ({ commit }, signInRequestBody) {
+    this.$axios.$post('/api/sign/in', signInRequestBody).then((res) => {
       // 登録OKだったらユーザ情報をstateに保存する
       commit('setIsSignedIn', true)
       // バックエンドのレスポンスでユーザIDを返却するようにしている
       commit('setId', res)
     })
   },
-  async signOut({ commit }) {
-    await this.$axios.$post('/api/sign/out').then(() => {
+  signOut ({ commit }) {
+    this.$axios.$post('/api/sign/out').then(() => {
       // サインアウトOKだったらユーザ情報をstateから破棄する
       commit('setIsSignedIn', false)
       commit('setId', '')

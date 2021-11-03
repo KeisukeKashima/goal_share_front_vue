@@ -78,8 +78,8 @@ export default {
   },
 
   methods: {
-    async fetchUser () {
-      await this.$axios.$get(`/api/users/goals/${this.userId}`).then((res) => {
+    fetchUser () {
+      this.$axios.$get(`/api/users/goals/${this.userId}`).then((res) => {
         this.user = res
       })
     }
