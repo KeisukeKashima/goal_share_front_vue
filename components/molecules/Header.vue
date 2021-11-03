@@ -67,8 +67,13 @@
         </a-menu>
       </div>
 
+      <div class="welcome">
+        <p v-if="isSignedIn">ようこそ！<br>{{ userName }}さん<br>(会員ID: {{ userId }})</p>
+        <p v-else>ログインすると全ての目標が閲覧できます！</p>
+      </div>
+
       <!--サービスロゴ-->
-      <div>
+      <div class="logo">
         <h2>目標共有サービス</h2>
         <p>みんなの目標が簡単に見れる！</p>
       </div>
@@ -86,6 +91,9 @@ export default {
     },
     userId () {
       return this.$store.getters['user/getId']
+    },
+    userName () {
+      return this.$store.getters['user/getDisplayName']
     }
   },
   methods: {
@@ -113,5 +121,13 @@ export default {
 .header-wrap {
   display: flex;
   justify-content: space-between;
+}
+.welcome {
+  width: auto;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.logo {
+  min-width: 200px;
 }
 </style>
