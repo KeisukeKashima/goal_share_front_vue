@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">{{ userId ? 'マイページ' : '会員登録ページ' }}</h2>
+    <page-title :title="pageTitle"/>
 
     <a-form-model>
       <!--メールアドレス-->
@@ -50,8 +50,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'UserForm',
+  components: { PageTitle },
 
   data () {
     return {
@@ -68,6 +71,12 @@ export default {
     userId: {
       type: Number,
       default: null
+    }
+  },
+
+  computed: {
+    pageTitle () {
+      return this.userId ? 'マイページ' : '会員登録ページ'
     }
   },
 

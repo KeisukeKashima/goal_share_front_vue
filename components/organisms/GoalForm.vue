@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2 style="text-align: center">{{ goalId ? '目標更新' : '目標新規作成' }}</h2>
+    <page-title :title="pageTitle"/>
+
     <a-form-model>
       <a-input
         v-model="goal.title"
@@ -30,8 +31,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'GoalForm',
+  components: { PageTitle },
 
   data () {
     return {
@@ -46,13 +50,19 @@ export default {
     }
   },
 
+  computed: {
+    pageTitle () {
+      return this.goalId ? '目標更新' : '目標新規作成'
+    }
+  },
+
   created () {
     this.fetchGoal()
   },
 
   methods: {
     fetchGoal () {
-      if(this.goalId) {
+      if (this.goalId) {
         this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
           this.goal = res
         })

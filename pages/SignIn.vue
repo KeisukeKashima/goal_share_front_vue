@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">ログイン</h2>
+    <page-title title="ログイン"/>
     <a-form-model>
 
       <!--メールアドレス-->
@@ -33,8 +33,12 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'SignIn',
+  components: { PageTitle },
+
   data () {
     return {
       signInRequestBody: {

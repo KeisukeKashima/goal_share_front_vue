@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">目標一覧</h2>
+    <page-title title="目標一覧"/>
     <div class="card-wrap">
       <div
         v-for="(goal, key) in goals"
@@ -26,8 +26,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'Goals',
+  components: { PageTitle },
 
   data () {
     return {

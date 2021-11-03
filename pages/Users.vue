@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">ユーザ一覧</h2>
+    <page-title title="ユーザ一覧"/>
     <div class="card-wrap">
       <div
         v-for="(user, key) in users"
@@ -27,8 +27,11 @@
 </template>
 
 <script>
+import PageTitle from '~/components/atoms/PageTitle'
+
 export default {
   name: 'Users',
+  components: { PageTitle },
 
   data () {
     return {
