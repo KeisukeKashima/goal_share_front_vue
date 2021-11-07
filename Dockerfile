@@ -9,8 +9,9 @@ RUN npm run build
 # nuxtの場合はgenerate後にdistが作成されるので追加
 RUN npm run generate
 
-# 本番環境
+# 実行環境
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY ./default.conf /etc/nginx/conf.d/default.conf.template
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD /bin/sh -c "envsubst '\$API_DOMAIN' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"

@@ -69,7 +69,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: envSet.apiDomain,
+    baseURL: envSet.serviceOrigin,
     // リクエストに Cookie を添えて送信するために withCredentials オプションを有効にする
     // ローカルでvueとapiを別で立てている時に、これがなくてapi側でセットしたクッキーがブラウザに保存されてなくてハマった
     credentials: true

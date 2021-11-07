@@ -1,3 +1,5 @@
 module.exports = {
-  apiDomain: 'http://localhost:8080'
+  // ローカルdocker用
+  // serviceOrigin: 'http://localhost'
+  serviceOrigin: 'http://54.168.46.31'
 }
