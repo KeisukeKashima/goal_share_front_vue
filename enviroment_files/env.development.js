@@ -1,3 +1,3 @@
 module.exports = {
-  serviceOrigin: 'http://localhost:8080'
+  serviceOrigin: 'http://localhost'
 }

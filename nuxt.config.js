@@ -1,5 +1,5 @@
 // 環境変数セット
-const envSet = require(`./enviroment_files/env.${process.env.NODE_ENV || 'development'}.js`)
+const envSet = require(`./enviroment_files/env.${process.env.NODE_ENV || 'default'}.js`)
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode

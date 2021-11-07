@@ -1,13 +1,17 @@
 # dockerのマルチステージビルドを利用し、資材作成用のnodeコンテナでdistを作成し、nginxにデプロイする
 # ビルド環境
 FROM node:lts-alpine as build-stage
+# docker-compose or タスク定義などから環境を渡す
+ARG NODE_ENV_PARAM
+
 WORKDIR /app
-COPY package*.json ./
+# Dockerfileのビルド時にキャッシュを使えるように変更の少ないpackage.jsonを先にnpm installしておく
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
-# nuxtの場合はgenerate後にdistが作成されるので追加
-RUN npm run generate
+# npm run buildの代わりにgenerateで静的ホスティング用資材作成
+RUN npm run generate:$NODE_ENV_PARAM
 
 # 実行環境
 FROM nginx:stable-alpine as production-stage
