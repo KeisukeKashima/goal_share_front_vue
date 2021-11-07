@@ -9,7 +9,7 @@ phases:
   install:
     # 実行環境バージョン指定
     runtime-versions:
-      docker: 21
+      docker: 19
 
   pre_build:
     commands:
