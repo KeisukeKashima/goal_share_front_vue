@@ -1,3 +1,3 @@
 module.exports = {
-  apiDomain: 'http://localhost:8080'
+  serviceOrigin: 'http://localhost'
 }

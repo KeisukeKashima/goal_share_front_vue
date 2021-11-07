@@ -1,5 +1,5 @@
 // 環境変数セット
-const envSet = require(`./enviroment_files/env.${process.env.NODE_ENV || 'development'}.js`)
+const envSet = require(`./enviroment_files/env.${process.env.NODE_ENV || 'default'}.js`)
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -69,7 +69,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: envSet.apiDomain,
+    baseURL: envSet.serviceOrigin,
     // リクエストに Cookie を添えて送信するために withCredentials オプションを有効にする
     // ローカルでvueとapiを別で立てている時に、これがなくてapi側でセットしたクッキーがブラウザに保存されてなくてハマった
     credentials: true
