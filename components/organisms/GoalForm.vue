@@ -26,6 +26,10 @@
         {{ goalId ? '目標を更新' : '目標新規作成' }}
       </a-button>
 
+      <a-button v-if="goalId" type="danger" @click="deleteGoal">
+        この目標を削除する
+      </a-button>
+
     </a-form-model>
   </div>
 </template>
@@ -80,6 +84,16 @@ export default {
         return
       }
       this.$emit('submit', this.goal)
+    },
+
+    deleteGoal () {
+      const isExecuteDelete = confirm('本当にこの目標を削除してもよろしいですか？')
+      if (isExecuteDelete) {
+        this.$axios.delete(`/api/goals/${this.goalId}`).then(() => {
+          alert('目標を削除しました！')
+          this.$router.push(`/users/${this.goal.user_id}`)
+        })
+      }
     }
   }
 }
