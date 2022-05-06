@@ -19,7 +19,8 @@ phases:
   build:
     commands:
       # nuxtビルドの環境を指定してビルド
-      - docker build -t ${ecr_repo}:${environment} --build-arg NODE_ENV_PARAM=${environment} .
+      # - docker build -t ${ecr_repo}:${environment} --build-arg NODE_ENV_PARAM=${environment} .
+      - docker build -t 150455123002.dkr.ecr.ap-northeast-1.amazonaws.com/goal_share_front_vue:production --build-arg NODE_ENV_PARAM=production .
 
   post_build:
     commands:
