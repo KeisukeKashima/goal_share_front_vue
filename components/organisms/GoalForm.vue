@@ -34,66 +34,58 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import PageTitle from '~/components/atoms/PageTitle'
+import Goal from '~/types/Goal'
 
-export default {
-  name: 'GoalForm',
-  components: { PageTitle },
+@Component({
+  components: {
+    PageTitle
+  }
+})
+export default class GoalForm extends Vue {
+  goal: Goal = {}
 
-  data () {
-    return {
-      goal: {}
-    }
-  },
+  @Prop({type: Number, default: null})
+  goalId: Number
 
-  props: {
-    goalId: {
-      type: Number,
-      default: null
-    }
-  },
-
-  computed: {
-    pageTitle () {
-      return this.goalId ? '目標更新' : '目標新規作成'
-    }
-  },
+  get pageTitle () {
+    return this.goalId ? '目標更新' : '目標新規作成'
+  }
 
   created () {
     this.fetchGoal()
-  },
+  }
 
-  methods: {
-    fetchGoal () {
-      if (this.goalId) {
-        this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
-          this.goal = res
-        })
-      }
-    },
+  fetchGoal () {
+    if (this.goalId) {
+      this.$axios.$get<Goal>(`/api/goals/${this.goalId}`).then((res) => {
+        this.goal = res
+      })
+    }
+  }
 
-    submit () {
-      // 簡易バリデーション
-      if (this.goal.title === '' ||
-        this.goal.detail === '' ||
-        this.goal.deadline === '' ||
-        this.goal.master_progress_status_id === ''
-      ) {
-        alert('未入力の項目があります')
-        return
-      }
-      this.$emit('submit', this.goal)
-    },
+  submit () {
+    // 簡易バリデーション
+    if (this.goal.title === '' ||
+      this.goal.detail === '' ||
+      this.goal.deadline === '' ||
+      this.goal.master_progress_status_id === ''
+    ) {
+      alert('未入力の項目があります')
+      return
+    }
+    this.$emit('submit', this.goal)
+  }
 
-    deleteGoal () {
-      const isExecuteDelete = confirm('本当にこの目標を削除してもよろしいですか？')
-      if (isExecuteDelete) {
-        this.$axios.delete(`/api/goals/${this.goalId}`).then(() => {
-          alert('目標を削除しました！')
-          this.$router.push(`/users/${this.goal.user_id}`)
-        })
-      }
+  deleteGoal () {
+    const isExecuteDelete = confirm('本当にこの目標を削除してもよろしいですか？')
+    if (isExecuteDelete) {
+      this.$axios.delete(`/api/goals/${this.goalId}`).then(() => {
+        alert('目標を削除しました！')
+        this.$router.push(`/users/${this.goal.user_id}`)
+      })
     }
   }
 }
