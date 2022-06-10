@@ -7,28 +7,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import GoalForm from '@/components/organisms/GoalForm'
+import GoalRequest from '../../types/GoalRequest'
 
-export default {
-  name: 'UpdateGoal',
-  components: { GoalForm },
+@Component({
+  components: { GoalForm }
+})
+export default class UpdateGoal extends Vue {
 
-  computed: {
-    goalId () {
-      return Number(this.$route.params.id)
-    }
-  },
-
-  methods: {
-    updateGoal (goal) {
-      this.$axios.put(`/api/goals/${this.goalId}`, goal).then(() => {
-        alert('目標を更新しました！')
-        this.$router.push(`/users/${goal.user_id}`)
-      })
-    }
+  get goalId () {
+    return Number(this.$route.params.id)
   }
 
+  updateGoal (goal: GoalRequest) {
+    this.$axios.put(`/api/goals/${this.goalId}`, goal).then(() => {
+      alert('目標を更新しました！')
+      this.$router.push(`/users/${goal.user_id}`)
+    })
+  }
 }
 </script>
 

@@ -25,29 +25,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import PageTitle from '~/components/atoms/PageTitle'
+import Goal from '~/types/Goal'
 
-export default {
-  name: 'Goals',
-  components: { PageTitle },
-
-  data () {
-    return {
-      goals: []
-    }
-  },
-
+@Component({
+  // 利用する子コンポーネントは@Componentの引数として定義する
+  components: {
+    PageTitle
+  }
+})
+export default class Goals extends Vue {
+  // ライフサイクルフックはクラスにライフサイクルの名前でメソッドを定義する
   created () {
     this.fetchGoals()
-  },
+  }
 
-  methods: {
-    fetchGoals () {
-      this.$axios.$get('/api/goals').then((res) => {
-        this.goals = res
-      })
-    }
+  // dataはクラスのメンバーとして定義する
+  goals: Goal[] = []
+
+  // methodsはクラスのメソッドとして定義する
+  fetchGoals () {
+    this.$axios.$get<Goal[]>('/api/goals').then((res) => {
+      this.goals = res
+    })
   }
 }
 </script>

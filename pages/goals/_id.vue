@@ -19,33 +19,36 @@
   </div>
 </template>
 
-<script>
-import PageTitle from '~/components/atoms/PageTitle'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import PageTitle from '~/components/atoms/PageTitle.vue'
+import Goal from '~/types/Goal'
 
-export default {
-  components: { PageTitle },
-  data () {
-    return {
-      goal: {}
-    }
-  },
-
-  computed: {
-    goalId () {
-      return Number(this.$route.params.id)
-    }
-  },
-
+@Component({
+  // 利用する子コンポーネントは@Componentの引数として定義する
+  components: {
+    PageTitle
+  }
+})
+export default class Goals extends Vue {
+  // ライフサイクルフックはクラスにライフサイクルの名前でメソッドを定義
   created () {
     this.fetchGoal()
-  },
+  }
 
-  methods: {
-    fetchGoal () {
-      this.$axios.$get(`/api/goals/${this.goalId}`).then((res) => {
-        this.goal = res
-      })
-    }
+  // dataはクラスのフィールドとして定義
+  goal: Goal = {}
+
+  // computedはクラスのgetterとして定義
+  get goalId() {
+    return Number(this.$route.params.id)
+  }
+
+  // methodsはクラスのメソッドとして定義
+  fetchGoal () {
+    this.$axios.$get<Goal>(`/api/goals/${this.goalId}`).then((res) => {
+      this.goal = res
+    })
   }
 }
 </script>
